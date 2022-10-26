@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
+import logo from "./logo.svg";
 import "./App.css";
 
 function getRandomInt(min, max) {
@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={reactLogo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" />
         {!!todo ? (
           <div>
             <h1 style={style}>{todo.title}</h1>
