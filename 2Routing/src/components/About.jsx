@@ -1,29 +1,58 @@
 import React from "react";
+import ImageUploading from "react-images-uploading";
 
 const About = () => {
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 69;
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
+
   return (
     <main className="w-[90%] m-auto bg-white text-black mt-3 p-[20px]">
-      <h1 className="text-3xl font-bold">About</h1>
-
-      <p className="mt-5 text-justify">
-        Cillum reprehenderit enim enim Lorem do duis ipsum qui cillum. In elit
-        commodo dolore laboris voluptate nisi enim minim non. Pariatur proident
-        exercitation veniam nisi mollit excepteur proident. Amet aute
-        reprehenderit ex laborum mollit tempor dolor ea. Non id incididunt sint
-        consectetur magna deserunt consectetur cupidatat consequat consectetur.
-        Cillum reprehenderit enim enim Lorem do duis ipsum qui cillum. In elit
-        commodo dolore laboris voluptate nisi enim minim non. Voluptate proident
-        esse cupidatat ut do. Labore ad irure irure excepteur do velit occaecat
-        excepteur consectetur minim consectetur duis. Occaecat reprehenderit et
-        voluptate irure aute incididunt mollit elit mollit. Reprehenderit id
-        aliquip occaecat culpa. Nulla pariatur dolor labore minim. Veniam
-        laboris elit sunt sint sit fugiat ex ipsum velit ullamco exercitation
-        labore occaecat aliquip.Adipisicing sint commodo nostrud aliqua
-        reprehenderit adipisicing. Pariatur proident exercitation veniam nisi
-        mollit excepteur proident. Amet aute reprehenderit ex laborum mollit
-        tempor dolor ea. Non id incididunt sint consectetur magna deserunt
-        consectetur cupidatat consequat consectetur.
-      </p>
+      <h1 className="text-2xl font-bold">About</h1>
+      <p className="text-xl font-semibold">This is the about page</p>
+      <ImageUploading
+        multiple
+        value={images}
+        onChange={onChange}
+        maxNumber={maxNumber}
+        dataURLKey="data_url"
+      >
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper">
+            <button
+              style={isDragging ? { color: "red" } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+              Click or Drop here
+            </button>
+            &nbsp;
+            <button onClick={onImageRemoveAll}>Remove all images</button>
+            {imageList.map((image, index) => (
+              <div key={index} className="image-item">
+                <img src={image["data_url"]} alt="" width="100" />
+                <div className="image-item__btn-wrapper">
+                  <button onClick={() => onImageUpdate(index)}>Update</button>
+                  <button onClick={() => onImageRemove(index)}>Remove</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </ImageUploading>
     </main>
   );
 };

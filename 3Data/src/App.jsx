@@ -16,11 +16,9 @@ function App() {
       setLoading(false);
     };
 
-
     setTimeout(() => {
       getPost();
     }, 2000);
-
   }, []);
 
   return (
@@ -57,7 +55,9 @@ function App() {
                     {post.id}
                   </th>
                   <td className="py-4 px-6">{post.title}</td>
-                  <td className="py-4 px-6">Ini merupakan bagian dari {post.content}</td>
+                  <td className="py-4 px-6">
+                    Ini merupakan bagian dari {post.content}
+                  </td>
                 </tr>
               );
             })}
